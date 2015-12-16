@@ -6,19 +6,23 @@
 /*   By: apaget <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 15:30:27 by apaget            #+#    #+#             */
-/*   Updated: 2015/12/15 17:08:24 by apaget           ###   ########.fr       */
+/*   Updated: 2015/12/16 18:36:19 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 #include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <stdio.h>
 
-# define BUFF_SIZE 1000000
+# define BUFF_SIZE 20
+# define MAX_FD 20
 
 typedef struct		s_sock
 {
