@@ -6,7 +6,7 @@
 /*   By: apaget <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 15:30:27 by apaget            #+#    #+#             */
-/*   Updated: 2016/01/06 19:41:58 by apaget           ###   ########.fr       */
+/*   Updated: 2016/01/08 18:14:44 by apaget           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <sys/types.h>
 #include <stdio.h>
 
-# define BUFF_SIZE 8
+# define BUFF_SIZE 10000
 # define MAX_FD 20
 
 typedef struct		s_sock
