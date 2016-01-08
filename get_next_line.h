@@ -6,7 +6,7 @@
 /*   By: apaget <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 15:30:27 by apaget            #+#    #+#             */
-/*   Updated: 2016/01/08 18:14:44 by apaget           ###   ########.fr       */
+/*   Updated: 2016/01/08 20:12:18 by apaget           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <stdio.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <sys/types.h>
 
-# define BUFF_SIZE 10000
-# define MAX_FD 20
+# define BUFF_SIZE 10
 
 typedef struct		s_sock
 {
@@ -31,7 +29,9 @@ typedef struct		s_sock
 	char			*line;
 }					t_sock;
 
-int		get_next_line(int const fd, char **line);
-char	*ft_strjoinfree(char *s1, char *s2);
+int					get_next_line(int const fd, char **line);
+char				*ft_strjoinfree(char *s1, char *s2);
+int					xread(t_sock *socket, char **line, char **tmp);
+int					make_line(t_sock *socket, char **line, char **tmp);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: apaget <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 15:14:51 by apaget            #+#    #+#             */
-/*   Updated: 2016/01/08 19:14:57 by apaget           ###   ########.fr       */
+/*   Updated: 2016/01/08 20:10:33 by apaget           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ int		xread(t_sock *socket, char **line, char **tmp)
 	return (1);
 }
 
+void	fill(char *buffer)
+{
+	int i;
+
+	i = 0;
+	while (buffer[i])
+		i++;
+	while (i < BUFF_SIZE)
+	{
+		buffer[i] = '\0';
+		i++;
+	}
+}
+
 int		make_line(t_sock *socket, char **line, char **tmp)
 {
 	if (*tmp)
@@ -52,8 +66,9 @@ int		make_line(t_sock *socket, char **line, char **tmp)
 		*line = ft_strjoinfree(socket->line, *tmp);
 		socket->line = NULL;
 		ft_strcpy(socket->buf, socket->buf + ft_strlen(*tmp) + 1);
+		fill(socket->buf);
 		free(*tmp);
-		return (0);
+		return (1);
 	}
 	else
 	{
@@ -74,39 +89,17 @@ int		get_next_line(int const fd, char **line)
 	if (line == NULL)
 		return (-1);
 	if (!socket.line)
-		if((socket.line = (char*)malloc(sizeof(char) * 1)) == NULL)
+		if ((socket.line = (char*)malloc(sizeof(char) * 1)) == NULL)
 			return (-1);
 	socket.line[0] = 0;
 	while (1)
 	{
 		tmp_int = xread(&socket, line, &tmp);
-		if(tmp_int != 1)
+		if (tmp_int != 1)
 			return (tmp_int);
-		if ((make_line(&socket, line, &tmp)) == 0)
-			return (1);
+		tmp_int = make_line(&socket, line, &tmp);
+		if (tmp_int == 1)
+			return (tmp_int);
 	}
 	return (99);
 }
-/*
-int main(int argc, const char *argv[])
-{
-	char *line;
-	line = NULL;
-	int fd = open("fichiertest", O_RDONLY);
-	int x = 1;
-
-	while (x)
-	{
-		x = get_next_line(-99, NULL);
-		printf("1 :Valeur de retour de gnl : %d \nLa ligne vaut : \"%s\" \n\n",x,line);
-		free(line);
-
-	}
-	x = get_next_line(fd, &line);
-	printf("ret = %d ligne = %s\n",x , line);
-	x = get_next_line(fd, &line);
-	printf("ret = %d ligne = %s\n",x , line);
-	x = get_next_line(fd, &line);
-	printf("ret = %d ligne = %s\n",x , line);
-	return 0;
-}*/
